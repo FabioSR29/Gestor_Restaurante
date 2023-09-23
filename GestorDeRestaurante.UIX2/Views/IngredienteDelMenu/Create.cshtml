@@ -1,0 +1,54 @@
+﻿@model GestorDeRestaurante.Model.MenuIngredientes
+
+@{
+    ViewData["Title"] = "Create";
+}
+  <center>
+     <h1> <i><p style="color:#FF5733";> Asociar ingrediente</p></i></h1>
+     </center>
+<h4>Datos del ingrediente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div> 
+                @Html.Hidden("idMenu", (string) ViewBag.Id_Menu)
+            </div>
+            <div class="form-group">
+
+                <label for="Name"> <b>Ingrediente:</b> Lista de ingredientes</label>
+                @Html.DropDownList("idIngrediente", new SelectList(ViewBag.laListaDeIngredientes, "Id", "Nombre"), new { @class = "form-control input-lg" })
+            </div>
+            <div class="form-group">
+
+                <label for="Name"> <b>Medida:</b> Lista de medidas</label>
+                @Html.DropDownList("idMedida", new SelectList(ViewBag.laListaDeMedidas, "Id", "Nombre"), new { @class = "form-control input-lg" })
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ValorAproximado" class="control-label"></label>
+                <input asp-for="ValorAproximado" class="form-control" />
+                <span asp-validation-for="ValorAproximado" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Asociar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar a la página principal</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

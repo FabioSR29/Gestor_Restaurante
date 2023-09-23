@@ -1,0 +1,61 @@
+﻿@model GestorDeRestaurante.Model.MesasOrdenes
+
+@{
+    ViewData["Title"] = "Catálogo de Órdenes";
+}
+<center>
+    <h1> <p style="color:#A6D15B";>Catálogo de órdenes</p></h1>
+</center>
+
+     <table class="table" border="1">
+ 
+  <tr>
+    <td >
+      <table class="table table-striped" ,class="table table-hover"  >
+            @{int var = 1;}
+          @foreach (var item in Model.MesasNumero1)
+                {
+                <tr>
+                 <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+               @if (item.Estado.ToString().Equals("NoDisponible")){
+                    <p><small>(@Html.DisplayFor(modelItem => item.Estado))</small> </p>}
+                    @if (item.estadoDeLaMesa.ToString().Equals("Ocupada")) {
+                    <p><small>(@Html.DisplayFor(modelItem => item.estadoDeLaMesa))</small> </p>
+                    }
+                 </td>
+                   <td>
+                  @Html.ActionLink("Ordenar", "Create", new { id=item.Id  }) |
+                @Html.ActionLink("Servir", "Servir", new { id=item.Id }) 
+                 </td>
+                 </tr>        
+          }
+    </table>
+    </td>
+      <td>
+      <table class="table table-striped" >
+    
+      
+            @{int var2 = 2;}
+          @foreach (var item in Model.MesasNumero2)
+                {         
+                <tr>
+                 <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+               @if (item.Estado.ToString().Equals("NoDisponible")){
+                    <p><small>(@Html.DisplayFor(modelItem => item.Estado))</small> </p>}
+                    @if (item.estadoDeLaMesa.ToString().Equals("Ocupada") ) {
+                    <p><small>(@Html.DisplayFor(modelItem => item.estadoDeLaMesa)) </small> </p>
+                            }
+                    </td>
+                   <td>
+                  @Html.ActionLink("Ordenar", "Create", new {  id=item.Id }) |
+                @Html.ActionLink("Servir", "Servir", new {  id=item.Id  }) 
+                 </td>
+                 </tr>
+          }
+      </table>
+    </td>
+    
+  </tr>
+</table>

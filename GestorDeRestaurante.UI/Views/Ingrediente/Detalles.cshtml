@@ -1,0 +1,56 @@
+﻿@model Tuple<List<GestorDeRestaurante.Model.IngredientesDelPlatillo>, string>
+
+
+@{
+    ViewData["Title"] = "DetallesDeIngredientes";
+}
+
+<h1>@Model.Item2</h1>
+<div>
+    <center>
+     <h4> <i><p style="color:#900C3F";>Detalles del ingrediente</p></i></h4>
+     </center>
+   
+    
+    <hr />
+
+       
+    @foreach (GestorDeRestaurante.Model.IngredientesDelPlatillo elPlatillo in Model.Item1)
+    {
+
+    <dl class="row">
+       
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => elPlatillo.NombreDelIngrediente)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => elPlatillo.NombreDelIngrediente)
+        </dd>
+          <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => elPlatillo.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => elPlatillo.Nombre)
+        </dd>
+         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => elPlatillo.NombreDeLaMedida)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => elPlatillo.NombreDeLaMedida)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => elPlatillo.Cantidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => elPlatillo.Cantidad)
+        </dd>
+       
+        
+    </dl>
+    }
+</div>
+<br/><div>
+    
+    <a asp-action="Index">Regresar</a>
+</div>
+

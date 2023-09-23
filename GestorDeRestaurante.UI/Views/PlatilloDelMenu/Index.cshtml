@@ -1,0 +1,68 @@
+﻿@model IEnumerable<GestorDeRestaurante.Model.Menu>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<center>
+    <i>
+        <h1> <p style="color:#C70039";>Catálogo de platillos del menú</p></h1>
+    </i>
+</center>
+
+<p>
+    <a asp-action="Create">Ingresar</a>
+
+    <a asp-action="MenuCompleto">Menú completo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagen)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                    @{
+                        var base64 = Convert.ToBase64String(item.Imagen);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    }
+                    
+                    <img src="@imgsrc" style="height:50px;" class="d-block w-50" />
+
+
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new {id=item.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { id=item.Id }) 
+              
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

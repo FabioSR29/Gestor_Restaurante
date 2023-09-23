@@ -1,0 +1,44 @@
+﻿@model IEnumerable<GestorDeRestaurante.Model.Menu>
+
+@{
+    ViewData["Title"] = "Catálogo de ingredientes del menú";
+}
+
+<center>
+<h1> <i><p style="color:#FF5733";>Catálogo de ingredientes del menú</p></i></h1>
+</center>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GananciaAproximada)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GananciaAproximada)
+            </td>
+            <td>
+                @Html.ActionLink("Ingredientes", "IngredientesDeUnPlatillo", new { id=item.Id}) 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

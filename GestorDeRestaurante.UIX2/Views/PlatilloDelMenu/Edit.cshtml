@@ -1,0 +1,77 @@
+﻿@model GestorDeRestaurante.Model.Menu
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<center>
+    <i>
+        <h1> <p style="color:#C70039";> Editar platillos del menú</p></h1>
+    </i>
+</center>
+
+@{
+    byte[] ImagenVieja = null;
+}
+
+<h4>Platillos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <br />
+             <div class="form-group">
+                <label asp-for="Categoria" class="control-label"></label>
+                  <select asp-for="Categoria" asp-items="Html.GetEnumSelectList<GestorDeRestaurante.Model.Categoria>()">
+                </select> 
+                <span asp-validation-for="Categoria" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+           <div class="form-group">
+
+               @{ImagenVieja = Model.ImagenVieja;}
+
+                @{
+                        var base64 = Convert.ToBase64String(Model.ImagenVieja);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    }
+                    <br />
+                    <img src="@imgsrc" style="height:50px;" class="d-block w-50" />
+                    <br />
+                <label asp-for="ImagenNueva" class="control-label"></label>
+                <br />
+                <input type="file" multiple name="ImagenNueva" accept=".jpg,.png"/>
+                <span asp-validation-for="ImagenNueva" class="text-danger"></span>
+                <input asp-for="ImagenVieja" class="form-control" type = "hidden" id = "Vieja"/>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Editar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>document.getElementById("Vieja").value = @ImagenVieja;</script>
+
+<div>
+
+    <a asp-action="Index">Regresar a la página principal</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
